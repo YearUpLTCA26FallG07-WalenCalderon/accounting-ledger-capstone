@@ -1,26 +1,10 @@
 package com.pluralsight;
 
-import org.w3c.dom.ls.LSOutput;
 
 public class Main {
     public static void main(String[] args){
-//        do{
-//           switch(screen){
-//               case "Home"->{screen = displayHomeScreen();}
-//               case "Ledger"->{screen = displayLedger();}
-//               case "Reports"->{screen = displayReports();}
-//               case "Exit" -> {
-//                       System.out.println("GoodBye!");
-//                }
-//               default -> {
-//                   System.out.println("Invalid selection");
-//               }
-//           }
-//        }while(screen != "EXIT");
-
         displayHomeScreen();
-
-    }//merge with display home
+    }
 
     public static void displayHomeScreen() {
         char homeSelection;
@@ -33,7 +17,7 @@ public class Main {
 
             homeSelection = Console.promptForChar("Select an option: ");
             switch (homeSelection) {
-                case 'D' -> { }
+                case 'D' -> {}
                 case 'P' -> {}
                 case 'L' -> displayLedger();
                 case 'X' -> System.out.println("Goodbye!!");
@@ -41,7 +25,7 @@ public class Main {
                     System.out.println("Invalid selection");
                 }
             }
-        }while(homeSelection != 'x');
+        }while(homeSelection != 'X');
     }//end of display home
 
     public static void displayLedger(){
@@ -59,15 +43,16 @@ public class Main {
                 case 'A' -> {/*todo - display all entries*/}
                 case 'D' -> {/* todo - Display only the entries that are deposits into the account*/}
                 case 'P' -> {/* todo - Display only the negative entries (or payments)*/}
-                case'R' -> {displayReports(); }
-                case 'H' ->  {break;}
+                case'R' -> displayReports();
+                case 'H' ->  {return;}
+                default -> System.out.println("Invalid option");
             }
-
-        }while( ledgerSelection !=  'H');
+        }while( true);
     }// end of display ledger
 
     public static void displayReports(){
         int reportSelection;
+        do {
         System.out.println("\nReports Screen");
         System.out.println("1) Month To Date");
         System.out.println("2) Previous Month");
@@ -78,10 +63,21 @@ public class Main {
 
         reportSelection = Console.promptForInt("Select an option: ");
 
-        switch (reportSelection){
-            case 1 ->
-        }
-    }
+            switch (reportSelection) {
+                case 1 -> { /* TODO */ }
+                case 2 -> { /* TODO */ }
+                case 3 -> { /* TODO */ }
+                case 4 -> { /* TODO */ }
+                case 5 -> { /* TODO */ }
+                case 0 -> { return; }
+                default -> System.out.println("Invalid option");
+            }
+        }while(true);
+    }//end of display reports
+
+    //End of displaying info -------------------------------------------------------------------------------------------|
 
 
-}//end of display reports
+
+
+}
