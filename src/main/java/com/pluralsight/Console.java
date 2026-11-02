@@ -58,13 +58,16 @@ public class Console {
         }
     }
 
-    public static long promptForLong(String prompt){
+    public static long promptForLong(String prompt) {
         System.out.println(prompt);
-        try {
-            return Long.parseLong(sc.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Enter a valid number.");
+    while(true) {
+            try {
+                return Long.parseLong(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a valid number.");
+            }
         }
-
     }
+
+
 }
