@@ -15,7 +15,7 @@ public class Main {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
 
-            homeSelection = Console.promptForChar("Select an option: ");
+            homeSelection = Console.promptForChar("Select an option: ", "DPLX");
             switch (homeSelection) {
                 case 'D' -> {}
                 case 'P' -> {}
@@ -38,7 +38,7 @@ public class Main {
             System.out.println("R) Reports");//todo - A new screen that allows the user to run pre-defined reports or to run a custom search
             System.out.println("H) Home"); // todo - go back to the home page
 
-            ledgerSelection = Console.promptForChar("Select an option: ");
+            ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");
             switch (ledgerSelection){
                 case 'A' -> {/*todo - display all entries*/}
                 case 'D' -> {/* todo - Display only the entries that are deposits into the account*/}
