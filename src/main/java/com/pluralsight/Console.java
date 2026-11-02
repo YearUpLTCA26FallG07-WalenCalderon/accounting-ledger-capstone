@@ -35,10 +35,9 @@ public class Console {
         }
     }
     public static String promptForString(String prompt) {
-        System.out.print(prompt);
-        String input = sc.nextLine();
-
         while (true) {
+            System.out.print(prompt);
+            String input = sc.nextLine();
             if (input.isEmpty()) {
                 System.out.println("Enter a valid text please");
             }
@@ -59,8 +58,8 @@ public class Console {
     }
 
     public static long promptForLong(String prompt) {
-        System.out.println(prompt);
     while(true) {
+        System.out.println(prompt);
             try {
                 return Long.parseLong(sc.nextLine());
             } catch (NumberFormatException e) {
