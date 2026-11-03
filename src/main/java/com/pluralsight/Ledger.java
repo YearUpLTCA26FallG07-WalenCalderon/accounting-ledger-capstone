@@ -32,6 +32,10 @@ public class Ledger {
         }
     }
 
+    /**
+     * This method is for  populating the Arraylist Transactions with the csv.
+     * @return ArrayList <Transaction>
+     */
     public static ArrayList <Transaction> populateTransactions(){
         ArrayList <Transaction> transactions = new ArrayList<>();
         try {
@@ -81,7 +85,22 @@ public class Ledger {
 
     }
 
-    public static void deposits(){
+    /**
+     * Making the display deposits here
+     * @param transactions
+     */
+    public static void deposits(ArrayList<Transaction>transactions){
+        for(Transaction transaction : transactions){
+            if (transaction.getAmount() > 0){
+                System.out.printf("%s | %s | %s | %s | %.2f%n",
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount()
+                );
+            }
+        }
 
     }
 
@@ -89,12 +108,39 @@ public class Ledger {
 
     }
 
-
-    public static void payments(){}
+    /**
+     * Making the display payments here
+     * @param transactions
+     */
+    public static void payments(ArrayList<Transaction>transactions){
+        for(Transaction transaction : transactions){
+            if (transaction.getAmount() < 0){
+                System.out.printf("%s | %s | %s | %s | %.2f%n",
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount()
+                );
+            }
+        }
+    }
 
     public static void addPayments(){}
 
+    /**
+     * Calculating the current balance of the account
+     * @param transactions
+     * @return double curremt balace d balance
+     */
+    public static double calculateCurrentBalance(ArrayList<Transaction> transactions){
+        double balance = 0;
 
+        for(Transaction transaction : transactions){
+            balance += transaction.getAmount();
+        }
+        return balance;
+    }
 
 
 

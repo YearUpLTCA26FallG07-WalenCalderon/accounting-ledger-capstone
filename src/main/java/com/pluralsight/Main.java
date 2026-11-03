@@ -1,4 +1,6 @@
 package com.pluralsight;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -10,16 +12,21 @@ public class Main {
 
     public static void displayHomeScreen() {
         char homeSelection;
-        double currentBalance = 0; //todo the curret balance
+
+
         do {
+            double currentBalance = Ledger.calculateCurrentBalance(transactions);
+
             System.out.println("\nHome Screen");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
-            System.out.println("Curret Balance" + currentBalance);
+
+            System.out.printf("\nCurrent Balance: $%.2f%n", currentBalance);
 
             homeSelection = Console.promptForChar("Select an option: ", "DPLX");//Taking input in char
+            //What we are doing to do with the input
             switch (homeSelection) {
                 case 'D' -> {}
                 case 'P' -> {}
@@ -43,6 +50,7 @@ public class Main {
             System.out.println("H) Home"); // todo - go back to the home page
 
             ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");//taking input with char
+            //What we are doing to do with the input
             switch (ledgerSelection){
                 case 'A' -> {Ledger.all(transactions);}
                 case 'D' -> {/* todo - Display only the entries that are deposits into the account*/}
@@ -66,7 +74,7 @@ public class Main {
         System.out.println("0) Back");
 
         reportSelection = Console.promptForInt("Select an option: "); // taking input with int
-            //What we going to do with the input
+            //What we are doing to do with the input
             switch (reportSelection) {
                 case 1 -> { /* TODO */ }
                 case 2 -> { /* TODO */ }
