@@ -1,11 +1,10 @@
 package com.pluralsight;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Ledger {
@@ -15,21 +14,19 @@ public class Ledger {
      */
     public static void all(ArrayList <Transaction> transactions ) {
         Transaction transaction;
-        try {
 
-            for (int i = 0; i < transactions.size(); i++) {
-                transaction = transactions.get(i);
-                System.out.printf("%s | %s | %s | %s | %.2f%n",
-                        transaction.getDate(),
-                        transaction.getTime(),
-                        transaction.getDescription(),
-                        transaction.getVendor(),
-                        transaction.getAmount()
-                );
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+
+        for (int i = 0; i < transactions.size(); i++) {
+            transaction = transactions.get(i);
+            System.out.printf("%s | %s | %s | %s | %.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount()
+            );
         }
+
     }
 
     /**
@@ -61,26 +58,16 @@ public class Ledger {
 
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
                 transactions.add(transaction);
-                //Writing on JSON formatt
-               /* writer.write("\n");
-                writer.write(String.format(" {\\\"id\\\": %d, \\\"name\\\": \\\"%s\\\", \\\"grossPay\\\": %.2f} ",
-                        .getEmployeeId(),
-                        employee.getName(),
-                        employee.getGrossPay()));
-
-
-                //Old version of printing files---------------------------------------------------------------------|
-                    /*System.out.printf("%d | %s | $%.2f%n",
-                            employee.getEmployeeId(),
-                            employee.getName(),
-                            employee.getGrossPay());*/
-                //--------------------------------------------------------------------------------------------------|*/
             }
-            //writer.close();
             reader.close();
         } catch (Exception e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
+        transactions.sort(
+                Comparator.comparing(Transaction::getDate) //Comparing by date
+                        .thenComparing(Transaction::getTime) //Comparing by time
+                        .reversed()//reversing the sorted list (ex: instead of 12345 is 54321)
+        );
         return transactions;
 
     }
@@ -94,7 +81,7 @@ public class Ledger {
             if (transaction.getAmount() > 0){
                 System.out.printf("%s | %s | %s | %s | %.2f%n",
                         transaction.getDate(),
-                        transaction.getTime(),
+                        transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                         transaction.getDescription(),
                         transaction.getVendor(),
                         transaction.getAmount()
@@ -104,7 +91,52 @@ public class Ledger {
 
     }
 
-    public static void addDeposit(){
+    public static void addDeposit(ArrayList<Transaction> transactions){
+        try {
+
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            String description = Console.promptForString("Description: ");
+            String vendor = Console.promptForString("Vendor: ");
+            double amount;
+            do {
+                amount = Console.promptForDouble("Amount: ");
+
+                if(amount <= 0 ){
+                    System.out.println("Payment should be more than 0");
+                }
+
+            }while (amount <= 0);
+            FileWriter writer = new FileWriter("src/main/resources/transactions.csv", true);
+
+            Transaction transaction = new Transaction(date, time,description,vendor, amount);
+            String line = String.format("%s|%s|%s|%s|%.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(
+                            DateTimeFormatter.ofPattern("HH:mm:ss")
+                    ),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount()
+            );
+            writer.write(line);
+
+            transactions.add(transaction);
+
+            transactions.sort(
+                    Comparator.comparing(Transaction::getDate) //Comparing by date
+                            .thenComparing(Transaction::getTime) //Comparing by time
+                            .reversed()//reversing the sorted list (ex: instead of 12345 is 54321)
+            );
+            writer.close();
+
+        }catch (IOException e) {
+            System.out.println("Error saving transaction: " + e.getMessage());
+        }
+
+
+
+
 
     }
 
@@ -117,7 +149,7 @@ public class Ledger {
             if (transaction.getAmount() < 0){
                 System.out.printf("%s | %s | %s | %s | %.2f%n",
                         transaction.getDate(),
-                        transaction.getTime(),
+                        transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                         transaction.getDescription(),
                         transaction.getVendor(),
                         transaction.getAmount()
@@ -126,7 +158,55 @@ public class Ledger {
         }
     }
 
-    public static void addPayments(){}
+    public static void addPayments(ArrayList<Transaction>transactions){
+
+
+        try {
+
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            String description = Console.promptForString("Description: ");
+            String vendor = Console.promptForString("Vendor: ");
+            double amount;
+            do {
+                amount = Console.promptForDouble("Amount: ");
+
+                if(amount <= 0 ){
+                    System.out.println("Payment should be more than 0");
+                }
+
+            }while (amount <= 0);
+
+            amount = -Math.abs(amount);
+
+            FileWriter writer = new FileWriter("src/main/resources/transactions.csv", true);
+
+            Transaction transaction = new Transaction(date, time,description,vendor, amount);
+            String line = String.format("%s|%s|%s|%s|%.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(
+                            DateTimeFormatter.ofPattern("HH:mm:ss")
+                    ),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount()
+            );
+            writer.write(line);
+
+            transactions.add(transaction);
+
+            transactions.sort(
+                    Comparator.comparing(Transaction::getDate) //Comparing by date
+                            .thenComparing(Transaction::getTime) //Comparing by time
+                            .reversed()//reversing the sorted list (ex: instead of 12345 is 54321)
+            );
+            writer.close();
+
+        }catch (IOException e) {
+            System.out.println("Error saving transaction: " + e.getMessage());
+        }
+
+    }
 
     /**
      * Calculating the current balance of the account

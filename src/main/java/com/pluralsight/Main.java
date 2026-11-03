@@ -1,5 +1,4 @@
 package com.pluralsight;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 
@@ -28,8 +27,8 @@ public class Main {
             homeSelection = Console.promptForChar("Select an option: ", "DPLX");//Taking input in char
             //What we are doing to do with the input
             switch (homeSelection) {
-                case 'D' -> {}
-                case 'P' -> {}
+                case 'D' -> {Ledger.addDeposit(transactions);}
+                case 'P' -> {Ledger.addPayments(transactions);}
                 case 'L' -> displayLedger();
                 case 'X' -> System.out.println("Goodbye!!");
                 default -> {
@@ -53,8 +52,8 @@ public class Main {
             //What we are doing to do with the input
             switch (ledgerSelection){
                 case 'A' -> {Ledger.all(transactions);}
-                case 'D' -> {/* todo - Display only the entries that are deposits into the account*/}
-                case 'P' -> {/* todo - Display only the negative entries (or payments)*/}
+                case 'D' -> {Ledger.deposits(transactions);}
+                case 'P' -> {Ledger.payments(transactions);}
                 case'R' -> displayReports();
                 case 'H' ->  {return;}
                 default -> System.out.println("Invalid option");
