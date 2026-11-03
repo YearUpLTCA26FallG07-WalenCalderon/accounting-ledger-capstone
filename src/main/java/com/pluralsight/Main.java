@@ -1,21 +1,25 @@
 package com.pluralsight;
-
+import java.util.ArrayList;
 
 public class Main {
+    public static final ArrayList<Transaction> transactions = Ledger.populateTransactions();//Array on public class level
+
     public static void main(String[] args){
         displayHomeScreen();
-    }
+    }//End of main
 
     public static void displayHomeScreen() {
         char homeSelection;
+        double currentBalance = 0; //todo the curret balance
         do {
             System.out.println("\nHome Screen");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
+            System.out.println("Curret Balance" + currentBalance);
 
-            homeSelection = Console.promptForChar("Select an option: ", "DPLX");
+            homeSelection = Console.promptForChar("Select an option: ", "DPLX");//Taking input in char
             switch (homeSelection) {
                 case 'D' -> {}
                 case 'P' -> {}
@@ -38,9 +42,9 @@ public class Main {
             System.out.println("R) Reports");//todo - A new screen that allows the user to run pre-defined reports or to run a custom search
             System.out.println("H) Home"); // todo - go back to the home page
 
-            ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");
+            ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");//taking input with char
             switch (ledgerSelection){
-                case 'A' -> {/*todo - display all entries*/}
+                case 'A' -> {Ledger.all(transactions);}
                 case 'D' -> {/* todo - Display only the entries that are deposits into the account*/}
                 case 'P' -> {/* todo - Display only the negative entries (or payments)*/}
                 case'R' -> displayReports();
@@ -61,8 +65,8 @@ public class Main {
         System.out.println("5) Search by Vendor"); //todo - prompt the user for the vendor name and display all entries for that vendor
         System.out.println("0) Back");
 
-        reportSelection = Console.promptForInt("Select an option: ");
-
+        reportSelection = Console.promptForInt("Select an option: "); // taking input with int
+            //What we going to do with the input
             switch (reportSelection) {
                 case 1 -> { /* TODO */ }
                 case 2 -> { /* TODO */ }
@@ -74,8 +78,6 @@ public class Main {
             }
         }while(true);
     }//end of display reports
-
-    //End of displaying info -------------------------------------------------------------------------------------------|
 
 
 
