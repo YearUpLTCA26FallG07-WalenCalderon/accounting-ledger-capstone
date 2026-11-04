@@ -99,20 +99,30 @@ public class Report {
         ===== CUSTOM SEARCH =====
         Press Enter to skip any field.
         """);
-        String startDate = Console.promptForOptionalString("Start Date (YYYY-MM-DD): ");
-        String endDate = Console.promptForOptionalString("End Date (YYYY-MM-DD): ");
+        LocalDate startDate = Console.promptForOptionalDate("Start Date (YYYY-MM-DD): ");
+        LocalDate endDate = Console.promptForOptionalDate("End Date (YYYY-MM-DD): ");
         String description = Console.promptForOptionalString("Description: ");
         String vendor = Console.promptForOptionalString("Vendor: ");
         Double amount = Console.promptForOptionalDouble("Amount: ");
 
-        if(!startDate.isEmpty()){
-            startDate = LocalDate.parse(startDate);
-        }
-
         ArrayList<Transaction> filteredList = new ArrayList<>();
         // 2. Loop through transactions
-        for(Transaction transaction : transactions){
+        for (Transaction transaction : transactions) {
 
+            LocalDate transactionDate = transaction.getDate();
+            boolean matches = true;
+
+            if (startDate != null && transactionDate.isBefore(startDate)) { // if it is not empty and is before the start date is false
+                matches = false;
+            }
+
+            if (endDate != null && transactionDate.isAfter(endDate)) { //if it is not empty and is after the end date is false
+                matches = false;
+            }
+
+            if (matches) {
+                filteredList.add(transaction);
+            }
         }
 
 

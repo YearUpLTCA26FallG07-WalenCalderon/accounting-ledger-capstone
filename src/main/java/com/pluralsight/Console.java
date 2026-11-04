@@ -1,5 +1,7 @@
 package com.pluralsight;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 public class Console {
     private static final Scanner sc = new Scanner(System.in);
@@ -52,7 +54,7 @@ public class Console {
          */
         public static String promptForOptionalString(String prompt) {
             System.out.println(prompt);
-            return sc.nextLine();
+            return sc.nextLine().trim();
         }
 
     /**
@@ -98,6 +100,24 @@ public class Console {
             }
         }
     }
+    //Primitive types---------------------------------------------------------------------------------------------------|
+
+
+    public static LocalDate promptForOptionalDate(String prompt) {
+        while(true) {
+            System.out.print(prompt);
+            String input = sc.nextLine().trim();
+            if (input.isEmpty()) {
+                return null;
+            }
+            try {
+                return LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                System.out.println("Enter a valid date (YYYY-MM-DD) or press Enter to skip.");
+            }
+        }
+    }
+
 
 
 }
