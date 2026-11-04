@@ -40,11 +40,42 @@ public class Console {
             String input = sc.nextLine();
             if (input.isEmpty()) {
                 System.out.println("Enter a valid text please");
+            } else {
+                return input;
             }
-            else{return input;}
 
         }
     }
+
+        /**
+         * Allows the user to input String with empty spaces
+         */
+        public static String promptForOptionalString(String prompt) {
+            System.out.println(prompt);
+            return sc.nextLine();
+        }
+
+    /**
+     * Allows the user to input Double
+     *with empty spaces
+     */
+    public static Double promptForOptionalDouble(String prompt) {
+
+        while(true) {
+            System.out.println(prompt);
+            String input = sc.nextLine().trim();
+            if (input.isEmpty()) {
+                return null;
+            }
+            try {
+                return Double.parseDouble(input);
+            }catch (NumberFormatException e){
+                System.out.println("Enter a valid amount or press enter to skip.");
+            }
+        }
+    }
+
+
     public static double promptForDouble(String prompt){
         while(true) {
             System.out.print(prompt);

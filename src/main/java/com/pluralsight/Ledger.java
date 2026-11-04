@@ -13,18 +13,9 @@ public class Ledger {
      * @param transactions
      */
     public static void all(ArrayList <Transaction> transactions ) {
-        Transaction transaction;
 
-
-        for (int i = 0; i < transactions.size(); i++) {
-            transaction = transactions.get(i);
-            System.out.printf("%s | %s | %s | %s | %.2f%n",
-                    transaction.getDate(),
-                    transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                    transaction.getDescription(),
-                    transaction.getVendor(),
-                    transaction.getAmount()
-            );
+        for(Transaction transaction : transactions){
+            displayTransaction(transaction);
         }
 
     }
@@ -78,17 +69,11 @@ public class Ledger {
      */
     public static void deposits(ArrayList<Transaction>transactions){
         for(Transaction transaction : transactions){
-            if (transaction.getAmount() > 0){
-                System.out.printf("%s | %s | %s | %s | %.2f%n",
-                        transaction.getDate(),
-                        transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                        transaction.getDescription(),
-                        transaction.getVendor(),
-                        transaction.getAmount()
-                );
+            if(transaction.getAmount() > 0) {
+                displayTransaction(transaction);
             }
-        }
 
+        }
     }
 
     public static void addDeposit(ArrayList<Transaction> transactions){
@@ -133,11 +118,6 @@ public class Ledger {
         }catch (IOException e) {
             System.out.println("Error saving transaction: " + e.getMessage());
         }
-
-
-
-
-
     }
 
     /**
@@ -146,20 +126,14 @@ public class Ledger {
      */
     public static void payments(ArrayList<Transaction>transactions){
         for(Transaction transaction : transactions){
-            if (transaction.getAmount() < 0){
-                System.out.printf("%s | %s | %s | %s | %.2f%n",
-                        transaction.getDate(),
-                        transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                        transaction.getDescription(),
-                        transaction.getVendor(),
-                        transaction.getAmount()
-                );
+            if(transaction.getAmount() < 0) {
+                displayTransaction(transaction);
             }
+
         }
     }
 
     public static void addPayments(ArrayList<Transaction>transactions){
-
 
         try {
 
@@ -182,6 +156,15 @@ public class Ledger {
             FileWriter writer = new FileWriter("src/main/resources/transactions.csv", true);
 
             Transaction transaction = new Transaction(date, time,description,vendor, amount);
+            /*String line = String.format("%s|%s|%s|%s|%.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(
+                            DateTimeFormatter.ofPattern("HH:mm:ss")
+                    ),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount()*/
+
             String line = String.format("%s|%s|%s|%s|%.2f%n",
                     transaction.getDate(),
                     transaction.getTime().format(
@@ -190,6 +173,7 @@ public class Ledger {
                     transaction.getDescription(),
                     transaction.getVendor(),
                     transaction.getAmount()
+
             );
             writer.write(line);
 
@@ -220,6 +204,18 @@ public class Ledger {
             balance += transaction.getAmount();
         }
         return balance;
+    }
+
+    public static void displayTransaction(Transaction transaction){
+         String line = String.format("%s|%s|%s|%s|%.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(
+                            DateTimeFormatter.ofPattern("HH:mm:ss")
+                    ),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount());
+        System.out.print(line);
     }
 
 

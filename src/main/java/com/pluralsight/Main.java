@@ -42,11 +42,11 @@ public class Main {
         char ledgerSelection;
         do {
             System.out.println("\nLedger Screen");
-            System.out.println("A) All");//todo - Display all entries
-            System.out.println("D) Deposits");//todo - Display only the entries that are deposits into the account
-            System.out.println("P) Payments"); //todo - Display only the negative entries (or payments)
+            System.out.println("A) All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments");
             System.out.println("R) Reports");//todo - A new screen that allows the user to run pre-defined reports or to run a custom search
-            System.out.println("H) Home"); // todo - go back to the home page
+            System.out.println("H) Home");
 
             ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");//taking input with char
             //What we are doing to do with the input
@@ -75,11 +75,12 @@ public class Main {
         reportSelection = Console.promptForInt("Select an option: "); // taking input with int
             //What we are doing to do with the input
             switch (reportSelection) {
-                case 1 -> { /* TODO */ }
-                case 2 -> { /* TODO */ }
-                case 3 -> { /* TODO */ }
-                case 4 -> { /* TODO */ }
-                case 5 -> { /* TODO */ }
+                case 1 -> { Report.monthToDate(transactions); }
+                case 2 -> { Report.previousMonth(transactions); }
+                case 3 -> { Report.yearToDate(transactions); }
+                case 4 -> { Report.previousYear(transactions); }
+                case 5 -> { Report.searchByVendor(transactions); }
+                case 6 -> {Report.customSearch(transactions);}
                 case 0 -> { return; }
                 default -> System.out.println("Invalid option");
             }
