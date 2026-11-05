@@ -195,7 +195,7 @@ public class Ledger {
     /**
      * Calculating the current balance of the account
      * @param transactions
-     * @return double curremt balace d balance
+     * @return double current balance d balance
      */
     public static double calculateCurrentBalance(ArrayList<Transaction> transactions){
         double balance = 0;

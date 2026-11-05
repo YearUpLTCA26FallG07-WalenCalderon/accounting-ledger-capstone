@@ -45,7 +45,7 @@ public class Main {
             System.out.println("A) All");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
-            System.out.println("R) Reports");//todo - A new screen that allows the user to run pre-defined reports or to run a custom search
+            System.out.println("R) Reports");
             System.out.println("H) Home");
 
             ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");//taking input with char
@@ -56,7 +56,7 @@ public class Main {
                 case 'P' -> {Ledger.payments(transactions);}
                 case'R' -> displayReports();
                 case 'H' ->  {return;}
-                default -> System.out.println("Invalid option");
+                default -> System.out.println("Invalid option try again");
             }
         }while( true);
     }// end of display ledger
@@ -69,7 +69,7 @@ public class Main {
         System.out.println("2) Previous Month");
         System.out.println("3) Year To Date");
         System.out.println("4) Previous Year");
-        System.out.println("5) Search by Vendor"); //todo - prompt the user for the vendor name and display all entries for that vendor
+        System.out.println("5) Search by Vendor");
         System.out.println("0) Back");
 
         reportSelection = Console.promptForInt("Select an option: "); // taking input with int

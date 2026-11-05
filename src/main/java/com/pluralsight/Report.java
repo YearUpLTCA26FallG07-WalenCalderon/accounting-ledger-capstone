@@ -1,6 +1,7 @@
 package com.pluralsight;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class Report {
 
@@ -109,6 +110,7 @@ public class Report {
         // 2. Loop through transactions
         for (Transaction transaction : transactions) {
 
+            // 3. Check which criteria were provided
             LocalDate transactionDate = transaction.getDate();
             boolean matches = true;
 
@@ -120,13 +122,47 @@ public class Report {
                 matches = false;
             }
 
+
+
+            //in order to get the Stardate and the endDate--------------------------------------------------------------|
+            if(!description.isEmpty()
+            && !transaction.getDescription().toLowerCase().contains(description.toLowerCase())){
+                matches = false;
+                System.out.println("The description provided is not available");
+            }
+            //in order to get description-------------------------------------------------------------------------------|
+
+
+            //in order to get the vendor--------------------------------------------------------------------------------|
+
+            if(!vendor.isEmpty()
+                    && !transaction.getVendor().toLowerCase().contains(vendor.toLowerCase())){
+                matches = false;
+                System.out.println("The vendor provided is not available");
+
+            }
+
+            //in order to get the amount--------------------------------------------------------------------------------|
+
+            if(amount != null && transaction.getAmount() != amount){
+                matches = false;
+                System.out.println("The amount provided is not available");
+            }
+
+            // 4. Display matching transactions
             if (matches) {
                 filteredList.add(transaction);
+                System.out.println(filteredList);
             }
+
+
+
+
         }
 
 
-        // 3. Check which criteria were provided
-        // 4. Display matching transactions
+
+
+
     }
 }
