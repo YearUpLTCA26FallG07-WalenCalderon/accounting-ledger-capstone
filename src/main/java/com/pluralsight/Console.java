@@ -53,7 +53,7 @@ public class Console {
          * Allows the user to input String with empty spaces
          */
         public static String promptForOptionalString(String prompt) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             return sc.nextLine().trim();
         }
 

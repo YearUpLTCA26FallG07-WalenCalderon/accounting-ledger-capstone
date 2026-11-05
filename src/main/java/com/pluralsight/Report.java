@@ -75,13 +75,13 @@ public class Report {
     public static void searchByVendor(ArrayList<Transaction> transactions) {
         ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 
-        String searchVendor = Console.promptForString("Who is the vendor you are searching for? ");
+        String searchVendor = Console.promptForString("Who is the vendor you are searching for? ").trim();
 
         for(Transaction transaction : transactions) {
 
             String vendor = transaction.getVendor();
 
-            if (searchVendor.equalsIgnoreCase(vendor)){
+            if (searchVendor.equalsIgnoreCase(vendor.trim())){
                 filteredTransactions.add(transaction);
 
             }
@@ -103,65 +103,114 @@ public class Report {
         LocalDate startDate = Console.promptForOptionalDate("Start Date (YYYY-MM-DD): ");
         LocalDate endDate = Console.promptForOptionalDate("End Date (YYYY-MM-DD): ");
         String description = Console.promptForOptionalString("Description: ");
-        String vendor = Console.promptForOptionalString("Vendor: ");
+        String vendor = Console.promptForOptionalString("Vendor: ").trim();
         Double amount = Console.promptForOptionalDouble("Amount: ");
 
         ArrayList<Transaction> filteredList = new ArrayList<>();
-        // 2. Loop through transactions
-        for (Transaction transaction : transactions) {
 
-            // 3. Check which criteria were provided
-            LocalDate transactionDate = transaction.getDate();
-            boolean matches = true;
-
-            if (startDate != null && transactionDate.isBefore(startDate)) { // if it is not empty and is before the start date is false
-                matches = false;
-            }
-
-            if (endDate != null && transactionDate.isAfter(endDate)) { //if it is not empty and is after the end date is false
-                matches = false;
-            }
-
-
-
-            //in order to get the Stardate and the endDate--------------------------------------------------------------|
-            if(!description.isEmpty()
-            && !transaction.getDescription().toLowerCase().contains(description.toLowerCase())){
-                matches = false;
-                System.out.println("The description provided is not available");
-            }
-            //in order to get description-------------------------------------------------------------------------------|
-
-
-            //in order to get the vendor--------------------------------------------------------------------------------|
-
-            if(!vendor.isEmpty()
-                    && !transaction.getVendor().toLowerCase().contains(vendor.toLowerCase())){
-                matches = false;
-                System.out.println("The vendor provided is not available");
-
-            }
-
-            //in order to get the amount--------------------------------------------------------------------------------|
-
-            if(amount != null && transaction.getAmount() != amount){
-                matches = false;
-                System.out.println("The amount provided is not available");
-            }
-
-            // 4. Display matching transactions
-            if (matches) {
-                filteredList.add(transaction);
-                System.out.println(filteredList);
-            }
-
-
-
-
+        // Validate date range
+        if (startDate != null && endDate != null
+                && startDate.isAfter(endDate)) {
+            System.out.println("Start date cannot be after end date.");
+            return;
         }
 
 
+        boolean startDateFound = false;
+        boolean endDateFound = false;
+        boolean descriptionFound = false;
+        boolean vendorFound = false;
+        boolean amountFound = false;
+        // 2. Loop through transactions
+        for (Transaction transaction : transactions) {
 
+            LocalDate transactionDate = transaction.getDate();
+            boolean matches = true;
+
+            // START DATE
+            if (startDate != null) {
+                if (transactionDate.isBefore(startDate)) {
+                    matches = false;
+                } else {
+                    startDateFound = true;
+                }
+            }
+
+            // END DATE
+            if (endDate != null) {
+                if (transactionDate.isAfter(endDate)) {
+                    matches = false;
+                } else {
+                    endDateFound = true;
+                }
+            }
+
+            // DESCRIPTION
+            if (!description.isEmpty()) {
+                boolean descriptionMatches =
+                        transaction.getDescription().toLowerCase(Locale.ROOT)
+                                .contains(description.toLowerCase(Locale.ROOT));
+
+                if (descriptionMatches) {
+                    descriptionFound = true;
+                } else {
+                    matches = false;
+                }
+            }
+
+            // VENDOR
+            if (!vendor.isEmpty()) {
+                boolean vendorMatches =
+                        transaction.getVendor().toLowerCase(Locale.ROOT)
+                                .contains(vendor.toLowerCase(Locale.ROOT));
+
+                if (vendorMatches) {
+                    vendorFound = true;
+                } else {
+                    matches = false;
+                }
+            }
+
+            // AMOUNT
+            if (amount != null) {
+                if (Double.compare(transaction.getAmount(), amount) == 0) {
+                    amountFound = true;
+                } else {
+                    matches = false;
+                }
+            }
+
+            // ADD TRANSACTION ONLY IF ALL FILTERS MATCH
+            if (matches) {
+                filteredList.add(transaction);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            System.out.println("No transactions match all your search criteria.");
+
+            if (startDate != null && !startDateFound) {
+                System.out.println("No transactions found on or after the start date.");
+            }
+
+            if (endDate != null && !endDateFound) {
+                System.out.println("No transactions found on or before the end date.");
+            }
+
+            if (!description.isEmpty() && !descriptionFound) {
+                System.out.println("No transactions found with that description.");
+            }
+
+            if (!vendor.isEmpty() && !vendorFound) {
+                System.out.println("No transactions found with that vendor.");
+            }
+
+            //Filtering
+            if (amount != null && !amountFound) {
+                System.out.println("No transactions found with the specified amount.");
+            }
+        } else {
+        Ledger.all(filteredList);
+    }
 
 
     }

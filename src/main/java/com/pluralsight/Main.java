@@ -70,6 +70,7 @@ public class Main {
         System.out.println("3) Year To Date");
         System.out.println("4) Previous Year");
         System.out.println("5) Search by Vendor");
+            System.out.println("6) Custom search");
         System.out.println("0) Back");
 
         reportSelection = Console.promptForInt("Select an option: "); // taking input with int
