@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="928" height="354" viewBox="0 0 928 354" role="img" aria-labelledby="title desc">
+  <title id="title">Pledger workflow</title>
+  <desc id="desc">Home records deposits and payments. Ledger shows transaction views. Reports finds transactions. Home loads and saves entries in transactions.csv.</desc>
+  <defs><marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 1 1 L 8.5 5 L 1 9" fill="none" stroke="#55DDF4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <rect width="928" height="354" rx="20" fill="#0D1821"/>
+  <g font-family="Cascadia Code, Consolas, Liberation Mono, monospace">
+    <text x="32" y="50" fill="#55DDF4" font-size="30">Pledger workflow</text>
+    <rect x="32" y="84" width="256" height="130" rx="14" fill="#132530" stroke="#2B4A5B" stroke-width="1.5"/>
+    <text x="50" y="115" fill="#55DDF4" font-size="16">01</text>
+    <text x="85" y="118" fill="#F2BD60" font-size="24">Home</text>
+    <text x="50" y="160" fill="#B9C9D5" font-size="16">Add deposit</text>
+    <text x="50" y="187" fill="#B9C9D5" font-size="16">Make payment</text>
+    <rect x="336" y="84" width="256" height="130" rx="14" fill="#132530" stroke="#2B4A5B" stroke-width="1.5"/>
+    <text x="354" y="115" fill="#55DDF4" font-size="16">02</text>
+    <text x="389" y="118" fill="#F2BD60" font-size="24">Ledger</text>
+    <text x="354" y="160" fill="#B9C9D5" font-size="16">All / Deposits</text>
+    <text x="354" y="187" fill="#B9C9D5" font-size="16">Payments</text>
+    <rect x="640" y="84" width="256" height="130" rx="14" fill="#132530" stroke="#2B4A5B" stroke-width="1.5"/>
+    <text x="658" y="115" fill="#55DDF4" font-size="16">03</text>
+    <text x="693" y="118" fill="#F2BD60" font-size="24">Reports</text>
+    <text x="658" y="160" fill="#B9C9D5" font-size="16">Date and vendor filters</text>
+    <text x="658" y="187" fill="#B9C9D5" font-size="16">Custom search</text>
+    <path d="M 297 149 l 30 0" stroke="#55DDF4" stroke-width="2" fill="none" marker-end="url(#head)"/>
+    <path d="M 601 149 l 30 0" stroke="#55DDF4" stroke-width="2" fill="none" marker-end="url(#head)"/>
+    <path d="M 159 223 l 0 35" stroke="#55DDF4" stroke-width="2" fill="none" marker-end="url(#head)" marker-start="url(#head)"/>
+    <rect x="32" y="267" width="256" height="59" rx="12" fill="#132530" stroke="#2B4A5B" stroke-width="1.5"/>
+    <text x="51" y="300" fill="#F2BD60" font-size="19">transactions.csv</text>
+    <text x="315" y="299" fill="#B9C9D5" font-size="16">Load on startup / Save new entries</text>
+  </g>
+</svg>

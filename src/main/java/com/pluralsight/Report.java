@@ -96,10 +96,18 @@ public class Report {
     // BONUS CHALLENGE
     public static void customSearch(ArrayList<Transaction> transactions) {
         // 1. Ask for optional search criteria
-        System.out.println("""
-        ===== CUSTOM SEARCH =====
-        Press Enter to skip any field.
-        """);
+//        System.out.println("""
+//        ===== =========================================================================================================================
+//                       ,-----.,--. ,--. ,---. ,--------. ,-----. ,--.   ,--.     ,---.  ,------.  ,---.  ,------.  ,-----.,--.  ,--.   \s
+//                      '  .--./|  | |  |'   .-''--.  .--''  .-.  '|   `.'   |    '   .-' |  .---' /  O  \\ |  .--. ''  .--./|  '--'  |   \s
+//                      |  |    |  | |  |`.  `-.   |  |   |  | |  ||  |'.'|  |    `.  `-. |  `--, |  .-.  ||  '--'.'|  |    |  .--.  |   \s
+//                      '  '--'\\'  '-'  '.-'    |  |  |   '  '-'  '|  |   |  |    .-'    ||  `---.|  | |  ||  |\\  \\ '  '--'\\|  |  |  |   \s
+//                       `-----' `-----' `-----'   `--'    `-----' `--'   `--'    `-----' `------'`--' `--'`--' '--' `-----'`--'  `--'   \s
+//        ===============================================================================================================================
+//        Press Enter to skip any field.
+//        """);
+        UI.showCustomSearch();
+
         LocalDate startDate = Console.promptForOptionalDate("Start Date (YYYY-MM-DD): ");
         LocalDate endDate = Console.promptForOptionalDate("End Date (YYYY-MM-DD): ");
         String description = Console.promptForOptionalString("Description: ");
