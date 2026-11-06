@@ -9,44 +9,34 @@ public class Main {
         displayHomeScreen();
     }//End of main
 
-    public static void displayHomeScreen() {
+    public static double displayHomeScreen() {
         char homeSelection;
-
+        double currentBalance;
 
         do {
-            double currentBalance = Ledger.calculateCurrentBalance(transactions);
+            currentBalance = Ledger.calculateCurrentBalance(transactions);
             UI.showBanner();
-            System.out.println("\nHome Screen");
-            System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment (Debit)");
-            System.out.println("L) Ledger");
-            System.out.println("X) Exit");
-
-            System.out.printf("\nCurrent Balance: $%.2f%n", currentBalance);
+            UI.showHomeMenu(String.format("$%.2f%n", currentBalance));
 
             homeSelection = Console.promptForChar("Select an option: ", "DPLX");//Taking input in char
             //What we are doing to do with the input
             switch (homeSelection) {
                 case 'D' -> {Ledger.addDeposit(transactions);}
                 case 'P' -> {Ledger.addPayments(transactions);}
-                case 'L' -> displayLedger();
+                case 'L' -> displayLedger(currentBalance);
                 case 'X' -> System.out.println("Goodbye!!");
                 default -> {
                     System.out.println("Invalid selection");
                 }
             }
         }while(homeSelection != 'X');
+        return currentBalance;
     }//end of display home
 
-    public static void displayLedger(){
+    public static void displayLedger(double currentBalance){
         char ledgerSelection;
         do {
-            System.out.println("\nLedger Screen");
-            System.out.println("A) All");
-            System.out.println("D) Deposits");
-            System.out.println("P) Payments");
-            System.out.println("R) Reports");
-            System.out.println("H) Home");
+            UI.showLedgerMenu(String.format("$%.2f%n", currentBalance));
 
             ledgerSelection = Console.promptForChar("Select an option: ", "ADPRH");//taking input with char
             //What we are doing to do with the input
@@ -54,24 +44,18 @@ public class Main {
                 case 'A' -> {Ledger.all(transactions);}
                 case 'D' -> {Ledger.deposits(transactions);}
                 case 'P' -> {Ledger.payments(transactions);}
-                case'R' -> displayReports();
+                case'R' -> displayReports(currentBalance);
                 case 'H' ->  {return;}
                 default -> System.out.println("Invalid option try again");
             }
         }while( true);
     }// end of display ledger
 
-    public static void displayReports(){
+    public static void displayReports(double currentBalance){
         int reportSelection;
         do {
-        System.out.println("\nReports Screen");
-        System.out.println("1) Month To Date");
-        System.out.println("2) Previous Month");
-        System.out.println("3) Year To Date");
-        System.out.println("4) Previous Year");
-        System.out.println("5) Search by Vendor");
-        System.out.println("6) Custom search");
-        System.out.println("0) Back");
+            UI.showReportsMenu(String.format("$%.2f%n", currentBalance));
+
 
         reportSelection = Console.promptForInt("Select an option: "); // taking input with int
             //What we are doing to do with the input
