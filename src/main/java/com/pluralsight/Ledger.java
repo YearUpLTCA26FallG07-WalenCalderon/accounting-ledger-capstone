@@ -1,11 +1,12 @@
 package com.pluralsight;
 import java.io.*;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 
 public class Ledger {
     /**
@@ -13,7 +14,10 @@ public class Ledger {
      * @param transactions
      */
     public static void all(ArrayList <Transaction> transactions ) {
-
+        UI.printTransactionHeader("""
+        ┌─┐ │   │     ─┬─ ┌─┐ ┌─┐ ╷ ╷ ┌── ┌─┐ ┌── ─┬─ ─┬─ ┌─┐ ╷ ╷ ┌──
+        ├─┤ │   │      │  ├─┘ ├─┤ │╲│ └─┐ ├─┤ │    │   │  │ │ │╲│ └─┐
+        │ │ └── └──    ╵  │ ╲ │ │ │ ╵ ──┘ │ │ └──  ╵  ─┴─ └─┘ │ ╵ ──┘\n""");
         for(Transaction transaction : transactions){
             displayTransaction(transaction);
         }
@@ -68,6 +72,11 @@ public class Ledger {
      * @param transactions
      */
     public static void deposits(ArrayList<Transaction>transactions){
+        UI.printTransactionHeader("""
+        ┌─╮ ┌── ┌─┐ ┌─┐ ┌── ─┬─ ─┬─ ┌──
+        │ │ ├── ├─┘ │ │ └─┐  │   │  └─┐
+        └─╯ └── │   └─┘ ──┘ ─┴─  ╵  ──┘\n""");
+
         for(Transaction transaction : transactions){
             if(transaction.getAmount() > 0) {
                 displayTransaction(transaction);
@@ -125,6 +134,11 @@ public class Ledger {
      * @param transactions
      */
     public static void payments(ArrayList<Transaction>transactions){
+        UI.printTransactionHeader("""
+        ┌─┐ ┌─┐ ╲ ╱ ╷╲╱╷ ┌── ╷ ╷ ─┬─ ┌──
+        ├─┘ ├─┤  ┬  │  │ ├── │╲│  │  └─┐
+        │   │ │  ╵  │  │ └── │ ╵  ╵  ──┘\n""");
+
         for(Transaction transaction : transactions){
             if(transaction.getAmount() < 0) {
                 displayTransaction(transaction);
@@ -206,16 +220,16 @@ public class Ledger {
         return balance;
     }
 
-    public static void displayTransaction(Transaction transaction){
-         String line = String.format("%s|%s|%s|%s|%.2f%n",
-                    transaction.getDate(),
-                    transaction.getTime().format(
-                            DateTimeFormatter.ofPattern("HH:mm:ss")
-                    ),
-                    transaction.getDescription(),
-                    transaction.getVendor(),
-                    transaction.getAmount());
-        System.out.print(line);
+    public static void displayTransaction(Transaction transaction) {
+        String amount = NumberFormat.getCurrencyInstance(Locale.US)
+                        .format(transaction.getAmount());
+
+        UI.printTransactionLine(
+                transaction.getDate().toString(),
+                transaction.getDescription(),
+                transaction.getVendor(),
+                amount
+        );
     }
 
 

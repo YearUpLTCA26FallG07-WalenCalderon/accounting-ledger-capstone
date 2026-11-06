@@ -21,7 +21,6 @@ public class Console {
                return character;
            }
        }
-
     }
 
     public static int promptForInt(String prompt) {
