@@ -146,25 +146,27 @@ public class UI {
         System.out.print(ANSI_cian);
         printTransactionLine(
                 "D A T E",
+                "T I M E",
                 "D E S C R I P T I O N",
                 "V E N D O R",
                 "A M O U N T"
         );
-        System.out.println("─".repeat(68) + ANSI_reset);
+        System.out.println("─".repeat(80) + ANSI_reset);
     }
 
 
     /**
      * this method is in order to format all transactions in an ordered list
      * @param date
+     * @param time
      * @param description
      * @param vendor
      * @param amount
      */
      public static void printTransactionLine(
-            String date, String description, String vendor, String amount) {
-        System.out.printf("%-10.10s  %-24.24s  %-16.16s  %12s%n"+ ANSI_reset,
-                date, description, vendor, amount);
+            String date, String time, String description, String vendor, String amount) {
+        System.out.printf("%-10.10s  %-10.10s  %-24.24s  %-16.16s  %12s%n"+ ANSI_reset,
+                date, time, description, vendor, amount);
 
     }
     //end of Formatting transactions------------------------------------------------------------------------------------|

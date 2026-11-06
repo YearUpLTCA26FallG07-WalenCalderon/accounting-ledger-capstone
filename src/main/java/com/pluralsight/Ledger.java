@@ -224,8 +224,13 @@ public class Ledger {
         String amount = NumberFormat.getCurrencyInstance(Locale.US)
                         .format(transaction.getAmount());
 
+        String displayTime = transaction.getTime().format(
+                DateTimeFormatter.ofPattern("hh:mm a", Locale.US)
+        );
+
         UI.printTransactionLine(
                 transaction.getDate().toString(),
+                displayTime,
                 transaction.getDescription(),
                 transaction.getVendor(),
                 amount
