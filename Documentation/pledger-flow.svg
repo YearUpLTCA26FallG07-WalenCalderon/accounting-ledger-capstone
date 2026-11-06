@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="558" viewBox="0 0 920 558" role="img" aria-labelledby="title description">
+  <title id="title">How Pledger works</title>
+  <desc id="description">At startup, transactions.csv is loaded and sorted before Home displays the balance. Home offers adding a deposit or payment, opening Ledger, or exiting. New transactions are appended to the file and Home refreshes. Ledger displays all transactions, deposits, or payments and opens Reports for date, vendor, and custom searches.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#55ddf4" stroke-width="1.5"/>
+    </marker>
+  </defs>
+  <rect width="920" height="558" rx="20" fill="#0d1821"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="36" y="51" fill="#f2bd60" font-size="28" font-weight="700">How Pledger works</text>
+    <g fill="none" stroke="#55ddf4" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M276 148 H340"/>
+      <path d="M460 196 V258"/>
+      <path d="M580 306 H644"/>
+      <path d="M340 306 H156 V422"/>
+      <path d="M60 422 V196"/>
+      <path d="M460 354 V422"/>
+      <path d="M764 354 V422"/>
+    </g>
+    <g fill="#b9c9d5" font-size="14">
+      <text x="283" y="134">Startup</text>
+      <text x="476" y="232">Newest first</text>
+      <text x="74" y="246">Save</text>
+      <text x="74" y="266">new entry</text>
+      <text x="588" y="290">L</text>
+      <text x="170" y="340">D / P</text>
+      <text x="476" y="392">X</text>
+      <text x="780" y="392">R</text>
+    </g>
+    <g fill="#132530" stroke="#2b4a5b" stroke-width="1.5">
+      <rect x="36" y="100" width="240" height="96" rx="12"/>
+      <rect x="340" y="100" width="240" height="96" rx="12"/>
+      <rect x="340" y="258" width="240" height="96" rx="12" stroke="#f2bd60"/>
+      <rect x="644" y="258" width="240" height="96" rx="12"/>
+      <rect x="36" y="422" width="240" height="96" rx="12"/>
+      <rect x="340" y="422" width="240" height="96" rx="38"/>
+      <rect x="644" y="422" width="240" height="96" rx="12"/>
+    </g>
+    <g fill="#f2bd60" font-size="21" font-weight="700">
+      <text x="56" y="138">transactions.csv</text>
+      <text x="360" y="138">Load transactions</text>
+      <text x="360" y="296">Home</text>
+      <text x="664" y="296">Ledger</text>
+      <text x="56" y="460">Deposit / payment</text>
+      <text x="438" y="466">Exit</text>
+      <text x="664" y="460">Reports</text>
+    </g>
+    <g fill="#b9c9d5" font-size="16">
+      <text x="56" y="170">Saved transaction history</text>
+      <text x="360" y="170">Keep records in memory</text>
+      <text x="360" y="328">Show balance and options</text>
+      <text x="664" y="328">All / deposits / payments</text>
+      <text x="56" y="486">Enter details and amount</text>
+      <text x="56" y="506">Then refresh Home</text>
+      <text x="411" y="492">Close the app</text>
+      <text x="664" y="492">Date / vendor / custom</text>
+    </g>
+  </g>
+</svg>
